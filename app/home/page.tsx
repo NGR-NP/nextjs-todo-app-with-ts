@@ -84,7 +84,7 @@ const page = () => {
   return (
     <>
       <NavBar firstName={data?.firstName} img={data?.img} lastName={data?.lastName} />
-      <main className="overflow-x-hidden md:pt-8 bg-slate-100">
+      <main className="overflow-x-hidden  md:pt-8 bg-slate-100">
         <div className="">
           <section className="px-8 pt-8 pb-4">
             <h1 className="text-3xl font-bold font-raleway text-slate-700">
@@ -121,15 +121,14 @@ const page = () => {
                         <div className="mt-4 w-full h-1 bg-slate-200">
                           <div
                             style={{ width: `${persentage.toFixed(2)}%` }}
-                            className={`${
-                              item.name === "business"
+                            className={`${item.name === "business"
                                 ? "bg-blue-500"
                                 : item.name === "personal"
-                                ? "bg-fuchsia-500"
-                                : item.name === "other"
-                                ? "bg-yellow-400"
-                                : "bg-gray-400"
-                            } w-0 h-1  duration-[800ms]`}
+                                  ? "bg-fuchsia-500"
+                                  : item.name === "other"
+                                    ? "bg-yellow-400"
+                                    : "bg-gray-400"
+                              } w-0 h-1  duration-[800ms]`}
                           />
                         </div>
                         <p className="mt-1 font-title">
