@@ -7,7 +7,6 @@ import {
   AiOutlineHome,
   AiOutlineLeft,
 } from "react-icons/ai";
-import { BsBookmark } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { HiMenuAlt1 } from "react-icons/hi";
 import {
@@ -39,12 +38,15 @@ const NavBar = ({
   };
   return (
     <>
-      <nav className="sticky top-0 z-40 px-4 py-4 backdrop-blur-sm md:hidden bg-slate-200">
+      <nav className="sticky top-0 z-40 px-4 py-4 backdrop-blur-sm bg-slate-200">
         <div className="flex gap-2 justify-between items-center">
-          <div className="flex-[0.5]">
+          <div className=" flex-[0.5]">
+            <div className="max-md:hidden font-bold text-slate-600 text-lg font-raleway tracking-widest">
+              NGR
+            </div>
             <HiMenuAlt1
               onClick={() => setShowSidePannel(!showSidePannel)}
-              className="w-6 h-6 fill-slate-500"
+              className="w-6 md:hidden h-6 fill-slate-500"
             />
           </div>
 

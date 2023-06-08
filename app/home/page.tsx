@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import NavBar from "../components/NavBar";
 import Lists from "./Lists";
 
 const page = () => {
