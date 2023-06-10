@@ -1,7 +1,12 @@
+"use client";
+
+import { useAppSelector } from "@/redux/hooks";
 import NavBar from "../components/NavBar";
 import Lists from "./Lists";
+import { selectCurrentFirstName } from "@/redux/slice/AuthSlice";
 
 const page = () => {
+  const firstName = useAppSelector(selectCurrentFirstName)
   const data = {
     firstName: "Tej",
     lastName: "karki",
@@ -83,12 +88,12 @@ const page = () => {
   ];
   return (
     <>
-      <NavBar firstName={data?.firstName} img={data?.img} lastName={data?.lastName} />
+      <NavBar  img={data?.img} lastName={data?.lastName} />
       <main className="overflow-x-hidden  md:pt-8 bg-slate-100">
         <div className="">
           <section className="px-8 pt-8 pb-4">
             <h1 className="text-3xl font-bold font-raleway text-slate-700">
-              What's up, {data?.firstName}!
+              What's up, <span className="capitalize">{firstName}</span>!
             </h1>
           </section>
           <section className="overflow-hidden w-screen">
@@ -124,11 +129,11 @@ const page = () => {
                             className={`${item.name === "business"
                                 ? "bg-blue-500"
                                 : item.name === "personal"
-                                  ? "bg-fuchsia-500"
-                                  : item.name === "other"
-                                    ? "bg-yellow-400"
-                                    : "bg-gray-400"
-                              } w-0 h-1  duration-[800ms]`}
+                                ? "bg-fuchsia-500"
+                                : item.name === "other"
+                                ? "bg-yellow-400"
+                                : "bg-gray-400"
+                            } w-0 h-1  duration-[800ms]`}
                           />
                         </div>
                         <p className="mt-1 font-title">

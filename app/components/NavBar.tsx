@@ -15,15 +15,16 @@ import {
 } from "react-icons/io";
 import { FcTodoList } from "react-icons/fc";
 import Link from "next/link";
+import { selectCurrentFirstName } from "@/redux/slice/AuthSlice";
+import { useAppSelector } from "@/redux/hooks";
 const NavBar = ({
-  firstName,
   lastName,
   img,
 }: {
-  firstName: string;
   lastName: string;
   img: string;
 }) => {
+  const firstName = useAppSelector(selectCurrentFirstName)
   const [showSidePannel, setShowSidePannel] = useState(false);
 
   const [openSearchBar, setOpenSearchBar] = useState(false);

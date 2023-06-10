@@ -1,3 +1,4 @@
+"use client"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Todo = {
@@ -26,10 +27,11 @@ const todoSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     updateTodo: (state, action: PayloadAction<Todo>) => {
-      const { id, task, date, catg } = action.payload;
-      const todoIndex = state.todos.findIndex((todo) => todo.id === id);
+      const todoIndex = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
       if (todoIndex !== -1) {
-        state.todos[todoIndex] = { id, task, date, catg };
+        state.todos[todoIndex] = action.payload;
       }
     },
   },
