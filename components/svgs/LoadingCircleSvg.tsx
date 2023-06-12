@@ -1,10 +1,12 @@
 import React from "react";
 
-const LoadingCircleSvg = ({style}: any) => {
+const LoadingCircleSvg = ({ style }: any) => {
   return (
     <svg
       aria-hidden="true"
-      className={`mx-2 inline z-10 w-4 h-4 text-black animate-loading-circle ${style}`}
+      className={`inline z-10  text-black animate-spin ${
+        style ? style : "w-4 h-4"
+      }`}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

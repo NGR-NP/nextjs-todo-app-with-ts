@@ -12,8 +12,8 @@ import { useUpdateTodoMutation } from "@/redux/api/updateTodo";
 import { useDeleteTodoMutation } from "@/redux/api/deleteTodoApiSlice";
 import LoadingCircleSvg from "@/components/svgs/LoadingCircleSvg";
 import { useAppDispatch } from "@/redux/hooks";
-import { deleteTodayTask, updateTodayTask } from "@/redux/slice/TodayTaskSlice";
-const Lists = ({
+import { removeTodo, updateTodoWithId } from "@/redux/slice/TodoSlice";
+const AllTodoList = ({
   task,
   catg,
   id,
@@ -43,9 +43,8 @@ const Lists = ({
             : result?.status === "not completed" && false;
         setChecked(updatedStatus);
       }
-      dispatch(updateTodayTask(result));
-
       console.log(result);
+      dispatch(updateTodoWithId(result));
     } catch (err) {
       console.log(err);
     }
@@ -63,14 +62,11 @@ const Lists = ({
       console.log("id", id);
       const result = await deleteTodo({ id }).unwrap();
       console.log("restlt", result);
-      dispatch(deleteTodayTask(result));
+      dispatch(removeTodo(result));
     } catch (err) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    // dispatch(updateStatus())
-  }, [checked]);
   return (
     <div className="px-1 w-full relativeoverflow-hidden">
       <div className="flex gap-4 justify-start items-center px-4 py-6 rounded-xl bg-white/80">
@@ -178,4 +174,4 @@ const Lists = ({
   );
 };
 
-export default Lists;
+export default AllTodoList;

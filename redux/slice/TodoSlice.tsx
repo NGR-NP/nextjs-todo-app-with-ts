@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Todo = {
-  id: number;
+  _id: string;
   task: string;
-  date: number;
+  date: string;
   catg: string;
+  status: string;
 };
 
 type TodosState = {
@@ -17,25 +18,30 @@ const initialState: TodosState = {
 };
 
 const todoSlice = createSlice({
-  name: "todo",
+  name: "todos",
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<Todo>) => {
-      state.todos.push(action.payload);
+    addTodo: (state, action: PayloadAction<Todo[]>) => {
+      state.todos = action.payload;
     },
-    removeTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
-    },
-    updateTodo: (state, action: PayloadAction<Todo>) => {
-      const todoIndex = state.todos.findIndex(
-        (todo) => todo.id === action.payload.id
+    removeTodo: (state, action: PayloadAction<Todo[]>) => {
+      state.todos = state.todos.filter(
+        (todo) => todo._id !== action.payload._id
       );
-      if (todoIndex !== -1) {
-        state.todos[todoIndex] = action.payload;
-      }
+    },
+    updateTodoWithId: (state, action: PayloadAction<Todo[]>) => {
+      const updatedTodo = state.todos.map((todo) =>
+        todo._id === action.payload?._id ? action.payload : todo
+      );
+      state.todos = updatedTodo
+    },
+    emptyTodo: () => {
+      return initialState;
     },
   },
 });
 
-export const { addTodo, removeTodo, updateTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, updateTodoWithId, emptyTodo } = todoSlice.actions;
 export default todoSlice.reducer;
+export const selectCurrentTodos = (state: { todos: TodosState }) =>
+  state.todos.todos;

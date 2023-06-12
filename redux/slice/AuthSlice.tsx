@@ -17,10 +17,10 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action: PayloadAction<Auth>) => {
       // const {firstName, lastName, img, id}= action.payload
-      state.auth = action.payload
+      state.auth = action.payload;
     },
-    logout: (state, action: PayloadAction<Auth>) => {
-      state.auth = null;
+    logout: () => {
+      return initialState;
     },
   },
 });
@@ -35,3 +35,6 @@ export const selectCurrentLastName = (state: { auth: AuthState }) =>
 
 export const selectCurrentImg = (state: { auth: AuthState }) =>
   state.auth.auth?.img;
+
+export const selectCurrentToken = (state: { auth: AuthState }) =>
+  state.auth.auth?.token;

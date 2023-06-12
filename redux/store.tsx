@@ -13,7 +13,8 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
+} from "redux-persist";
+import TodayTaskReducer from "./slice/TodayTaskSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +28,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: persistedReducer,
     todos: todosReducer,
+    todayTask: TodayTaskReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

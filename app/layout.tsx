@@ -34,13 +34,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html
       lang="en"
       className={`${raleway.variable} ${inter.variable} ${title.variable} ${paragraph.variable} ${bitter.variable}`}
     >
-      <body className="p-0 m-0 bg-slate-200/80">
-        <Providers>{children}</Providers>
+      <body className="p-0 m-0 bg-slate-100">
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
