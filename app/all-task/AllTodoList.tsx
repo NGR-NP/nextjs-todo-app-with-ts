@@ -11,8 +11,9 @@ import { useTodoQuery } from "@/redux/api/getTodoByIdApiSlice";
 import { useUpdateTodoMutation } from "@/redux/api/updateTodo";
 import { useDeleteTodoMutation } from "@/redux/api/deleteTodoApiSlice";
 import LoadingCircleSvg from "@/components/svgs/LoadingCircleSvg";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removeTodo, updateTodoWithId } from "@/redux/slice/TodoSlice";
+import { selectCurrentTodayTask } from "@/redux/slice/TodayTaskSlice";
 const AllTodoList = ({
   task,
   catg,
@@ -27,7 +28,8 @@ const AllTodoList = ({
 }) => {
   const convertStatus = status === "completed" ? true : false;
   const dispatch = useAppDispatch();
-
+  const singleTodo = useAppSelector(selectCurrentTodayTask);
+  const [singleTask, setSingleTodo] = useState({});
   const [showTodo, setShowTodo] = useState(false);
   const [checked, setChecked] = useState(convertStatus);
   const { data } = useTodoQuery({ id });
@@ -67,6 +69,15 @@ const AllTodoList = ({
       console.log(error);
     }
   };
+  const getTodoWithId = (id: string) => {
+    const todo = singleTodo.find((todo) => todo._id === id);
+    setSingleTodo(todo);
+  };
+  useEffect(() => {
+    if (showTodo) {
+      getTodoWithId(id);
+    }
+  }, [showTodo]);
   return (
     <div className="px-1 w-full relativeoverflow-hidden">
       <div className="flex gap-4 justify-start items-center px-4 py-6 rounded-xl bg-white/80">
@@ -147,26 +158,26 @@ const AllTodoList = ({
           </div>
           <div className="flex gap-2 font-inter">
             <b>Task:</b>
-            <p className="font-paragraph">{data?.task}</p>
+            <p className="font-paragraph">{singleTask?.task}</p>
           </div>
           <div className="flex gap-2 my-4">
             <b>Due:</b>
-            <p className="font-title">{data?.date}</p>
+            <p className="font-title">{singleTask?.date}</p>
           </div>
         </div>
         <div className="flex justify-end px-8 my-4">
           <p
             className={`${
-              data?.category?.name === "business"
+              singleTask?.category?.name === "business"
                 ? "bg-blue-500"
-                : data?.category?.name === "personal"
+                : singleTask?.category?.name === "personal"
                 ? "bg-fuchsia-500"
-                : data?.category?.name === "other"
+                : singleTask?.category?.name === "other"
                 ? "bg-yellow-400"
                 : "bg-gray-400"
             } font-title px-3 uppercase tracking-widest text-white rounded py-1`}
           >
-            {data?.category?.name}
+            {singleTask?.category?.name}
           </p>
         </div>
       </div>
